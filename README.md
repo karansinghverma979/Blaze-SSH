@@ -8,7 +8,9 @@
 
 ## 🎯 Purpose & Overview
 
-**Blaze** is a unified multi-device automation suite connecting a Windows 11 workstation with an Android Termux node. It features dual-mode operation: **interactive ASCII terminal menus** for human exploration, and **instant CLI switches (`--otp`, `--pull`, `--mount`)** for fast execution and AI assistant headless automation.
+**Blaze** is a unified multi-device automation suite connecting a Windows 11 workstation with an Android Termux node. It features dual-mode operation:
+- **Interactive Terminal Menus (Default)**: Numbered ASCII menus for human exploration.
+- **Fast-Path CLI Flags**: Instant single-shot execution (`--otp`, `--pull`, `--mount`) for power-users and headless AI automation.
 
 ---
 
@@ -30,15 +32,77 @@
 
 ---
 
+## 🛠️ Complete Setup & PowerShell Profile Installation
+
+### 1. Prerequisites
+- **Windows PC**: Python 3.10+, OpenSSH Client/Server, Scoop (`scoop install scrcpy adb rclone`)
+- **Android Phone**: Termux & Termux:API (`pkg install openssh termux-api python`)
+- **SSH Key Trust**: Copy your `~/.ssh/id_ed25519.pub` from PC into Termux `~/.ssh/authorized_keys`.
+
+---
+
+### 2. How to Configure Your PowerShell Profile
+
+You have **two easy methods** to integrate Blaze commands into your daily terminal:
+
+#### 🌟 Method A: Dot-Source Standalone Module (Recommended & Easiest)
+Open your PowerShell profile file by running:
+```powershell
+notepad $PROFILE
+```
+Add this single line at the bottom of the file:
+```powershell
+. "$env:USERPROFILE\Void\Blaze\blaze_profile.ps1"
+```
+*Save and reload your terminal (`. $PROFILE`). All `blaze-*` commands are now permanently active!*
+
+---
+
+#### 📋 Method B: Copy & Paste Directly into Profile
+If you prefer embedding the code directly, open `blaze_profile.ps1` from this repository, copy its entire contents, and paste it into your `$PROFILE`.
+
+---
+
+### ⚙️ What to Customize (For Your Own Network & Phone)
+If you are setting this up on a new device or router, edit the variables inside [`blaze_profile.ps1`](file:///C:/Users/karan/Void/Blaze/blaze_profile.ps1):
+1. **Hardware MAC Address**: Set `$knownMac` to your phone's Wi-Fi MAC address for instantaneous router discovery.
+2. **Termux Username**: If your Termux user differs from `u0_a46`, update `User <your-user>` in the `configContent` block.
+3. **SSH Key Path**: Point `IdentityFile` to your desired private key (default: `~/.ssh/id_ed25519`).
+
+---
+
+## ⚡ Quick Start & Common Commands
+
+```powershell
+# 1. Instant 1-Click SMS OTP to PC Clipboard:
+blaze-phone --otp
+
+# 2. Pull Phone Clipboard to PC:
+blaze-clip --pull
+
+# 3. Mount Phone as Drive Z:\ in Windows Explorer:
+blaze-file --mount
+
+# 4. Launch 60fps Wireless Screen Stream (Stealth - Screen Off):
+blaze-wifi --stealth
+
+# 5. Open Interactive Voice Center:
+blaze-speak
+```
+
+---
+
 ## 📁 Repository Structure
 
 ```text
 C:\Users\karan\Void\Blaze\
 ├── .gitignore          # Exclusions for Python cache & temp files
-├── README.md           # Master repository documentation
+├── README.md           # Master repository documentation & setup guide
 ├── RULES.md            # Invariants, safety rules & port allocations
-├── INSTRUCTIONS.md     # Installation guide & usage instructions
+├── INSTRUCTIONS.md     # In-depth operational runbook
 ├── ARCHITECTURE.md     # System topology & network specifications
+├── SKILL.md            # Authoritative Antigravity AI assistant skill
+├── blaze_profile.ps1   # Standalone PowerShell profile integration module
 └── scripts/
     ├── blaze_phone.py  # Telephony, SMS, Contacts & Cellular hub
     ├── blaze_wifi.py   # Wi-Fi radar, Scrcpy streaming & ADB hub
@@ -51,28 +115,8 @@ C:\Users\karan\Void\Blaze\
 
 ---
 
-## ⚡ Quick Start
-
-```powershell
-# 1. 1-Click OTP to PC Clipboard:
-blaze-phone --otp
-
-# 2. Pull Phone Clipboard:
-blaze-clip --pull
-
-# 3. Mount Phone as Drive Z:\ in Windows Explorer:
-blaze-file --mount
-
-# 4. Launch Wireless Screen Stream in Stealth Mode (Screen Off):
-blaze-wifi --stealth
-
-# 5. Open Interactive Voice Center:
-blaze-speak
-```
-
----
-
-## 📜 Documentation & Governance
+## 📜 Governance & Architecture
 - [RULES.md](file:///C:/Users/karan/Void/Blaze/RULES.md): Architectural invariants and safety protocols.
-- [INSTRUCTIONS.md](file:///C:/Users/karan/Void/Blaze/INSTRUCTIONS.md): Detailed installation & operational runbook.
+- [INSTRUCTIONS.md](file:///C:/Users/karan/Void/Blaze/INSTRUCTIONS.md): Detailed installation runbook.
 - [ARCHITECTURE.md](file:///C:/Users/karan/Void/Blaze/ARCHITECTURE.md): System diagrams and data flow.
+- [SKILL.md](file:///C:/Users/karan/Void/Blaze/SKILL.md): Antigravity AI Agent definition.

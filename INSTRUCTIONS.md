@@ -7,13 +7,13 @@ This guide details how to install, configure, and operate the entire **Motobook 
 ## 🛠️ 1. Prerequisites & Environment Setup
 
 ### PC Node (Motobook - Windows 11)
-1. **Python 3.10+**: Ensure Python is in `PATH`.
+1. **Python 3.10+**: Ensure Python is added to system `PATH`.
 2. **OpenSSH Client & Server**:
    ```powershell
    Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
    Start-Service sshd
    ```
-3. **Scoop Packages**:
+3. **Scoop Portable Tools**:
    ```powershell
    scoop install scrcpy adb rclone
    ```
@@ -34,28 +34,26 @@ This guide details how to install, configure, and operate the entire **Motobook 
 
 ---
 
-## 🚀 2. PowerShell Profile Integration
+## 🚀 2. PowerShell Profile Setup Walkthrough
 
-Add the following mappings to your `$PROFILE` (`Microsoft.PowerShell_profile.ps1`):
-
+### Step 1: Open Your PowerShell Profile
+Run this command in any terminal:
 ```powershell
-# Blaze Command Hubs
-function Invoke-BlazePhone  { & python "$env:USERPROFILE\Void\Blaze\scripts\blaze_phone.py" @args }
-function Invoke-BlazeWifi   { & python "$env:USERPROFILE\Void\Blaze\scripts\blaze_wifi.py" @args }
-function Invoke-BlazeMedia  { & python "$env:USERPROFILE\Void\Blaze\scripts\blaze_media.py" @args }
-function Invoke-BlazeTTS    { & python "$env:USERPROFILE\Void\Blaze\scripts\blaze_speak.py" @args }
-function Invoke-BlazeClip   { & python "$env:USERPROFILE\Void\Blaze\scripts\blaze_clip.py" @args }
-function Invoke-BlazeNotifs { & python "$env:USERPROFILE\Void\Blaze\scripts\blaze_notifs.py" @args }
-function Invoke-BlazeFile   { & python "$env:USERPROFILE\Void\Blaze\scripts\blaze_file.py" @args }
-
-Set-Alias -Name blaze-phone  -Value Invoke-BlazePhone
-Set-Alias -Name blaze-wifi   -Value Invoke-BlazeWifi
-Set-Alias -Name blaze-media  -Value Invoke-BlazeMedia
-Set-Alias -Name blaze-speak  -Value Invoke-BlazeTTS
-Set-Alias -Name blaze-clip   -Value Invoke-BlazeClip
-Set-Alias -Name blaze-notifs -Value Invoke-BlazeNotifs
-Set-Alias -Name blaze-file   -Value Invoke-BlazeFile
+notepad $PROFILE
 ```
+*(If the file does not exist, run `New-Item -ItemType File -Path $PROFILE -Force` first).*
+
+### Step 2: Add Dot-Source Loader
+Add this single line at the end of `$PROFILE`:
+```powershell
+. "$env:USERPROFILE\Void\Blaze\blaze_profile.ps1"
+```
+
+### Step 3: Reload Your Shell
+```powershell
+. $PROFILE
+```
+Now all commands (`blaze`, `blaze-phone`, `blaze-wifi`, `blaze-media`, `blaze-speak`, `blaze-clip`, `blaze-notifs`, `blaze-file`, `blaze-status`, `blaze-location`) are active!
 
 ---
 
