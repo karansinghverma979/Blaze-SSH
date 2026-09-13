@@ -15,7 +15,7 @@ This guide details how to install, configure, and operate the entire **Motobook 
    ```
 3. **Scoop Portable Tools**:
    ```powershell
-   scoop install scrcpy adb rclone
+   scoop install scrcpy adb fzf
    ```
 4. **SSH Key Pair**:
    Ensure `~/.ssh/id_ed25519.pub` exists and is appended to Termux `~/.ssh/authorized_keys`.
@@ -53,7 +53,7 @@ Add this single line at the end of `$PROFILE`:
 ```powershell
 . $PROFILE
 ```
-Now all commands (`blaze`, `blaze-phone`, `blaze-wifi`, `blaze-media`, `blaze-speak`, `blaze-clip`, `blaze-notifs`, `blaze-file`, `blaze-status`, `blaze-location`) are active!
+Now all commands (`blaze`, `blaze-status`, `blaze-location`, `blaze-phone`, `blaze-clip`, `blaze-notifs`, `blaze-wifi`, `blaze-file`, `blaze-media`, `blaze-speak`) are active!
 
 ---
 
@@ -61,9 +61,12 @@ Now all commands (`blaze`, `blaze-phone`, `blaze-wifi`, `blaze-media`, `blaze-sp
 
 | Command | Fast-Path Switch | Description |
 | :--- | :--- | :--- |
+| `blaze` | `"<cmd>"` | Dynamic IP discovery and interactive Termux Zsh shell. |
 | `blaze-status` | `--json`, `--battery`, `--wifi`, `--storage` | Visual HUD: Battery %, Wi-Fi metrics, storage, temp & uptime. |
+| `blaze-location` | `--live`, `--gps`, `--network`, `-o` | Geolocation radar, reverse geocoded address & Google Maps. |
 | `blaze-phone` | `--otp` | 1-Click OTP extraction from SMS directly to PC clipboard. |
 | `blaze-phone` | `--contacts [query]` | Search address book contacts with phone/SMS actions. |
+| `blaze-phone` | `--call <number>` / `--speaker <num>` | Dial phone call on earpiece or speakerphone mode. |
 | `blaze-phone` | `--logs` | View recent incoming/outgoing/missed call history. |
 | `blaze-phone` | `--cell` | Inspect live 5G NR / LTE cellular carrier telemetry. |
 | `blaze-wifi` | `--info` | View active Wi-Fi SSID, BSSID, RSSI dBm, link speed, and IP. |
@@ -75,11 +78,16 @@ Now all commands (`blaze`, `blaze-phone`, `blaze-wifi`, `blaze-media`, `blaze-sp
 | `blaze-clip` | `--sync` | Side-by-side visual diff and bidirectional sync. |
 | `blaze-notifs`| `--list` | View incoming active Android notifications. |
 | `blaze-notifs`| `--otp` | Extract OTP from active notifications. |
-| `blaze-notifs`| `--toast "Text"` | Display floating toast on phone screen. |
+| `blaze-notifs`| `--toast "Text"` | Display centered floating toast on phone screen. |
+| `blaze-notifs`| `--dialog <widget>` | Spawn interactive mobile dialog (text, confirm, pickers). |
 | `blaze-file` | `--drop <path>` | Transfer PC file to `/sdcard/Download/` + auto MediaStore scan. |
-| `blaze-file` | `--pull <path>` | Download remote file from phone to `~/Blaze/`. |
-| `blaze-file` | `--mount` | Mount phone storage as native Windows Drive **`Z:\`**. |
-| `blaze-file` | `--unmount` | Disconnect Drive **`Z:\`** and stop Rclone. |
-| `blaze-speak`| `"<text>"` | Synthesize neural voice on phone speaker via Edge-TTS. |
-| `blaze-speak`| `--clip` | Read Windows clipboard out loud on phone. |
-| `blaze-speak`| `--status` | Speak battery % and network connectivity briefing. |
+| `blaze-file` | `--pull <path>` | Download remote file directly to PC `~/Downloads/`. |
+| `blaze-file` | `--open <path>` | Open remote file in Android default app/chooser. |
+| `blaze-file` | `--url <url>` | Open URL in mobile Chrome browser. |
+| `blaze-media` | `--play <path>` | Play audio file on Blaze hardware speakers. |
+| `blaze-media` | `--volume <0-15>` | Set system volume stream level. |
+| `blaze-media` | `--browse` | Launch hierarchical interactive FZF audio explorer. |
+| `blaze-speak` | `"<text>"` | Synthesize neural voice on phone speaker via Edge-TTS. |
+| `blaze-speak` | `--clip` | Read Windows clipboard out loud on phone. |
+| `blaze-speak` | `--status` | Speak battery % and network connectivity briefing. |
+| `blaze-speak` | `--alert` | Trigger emergency siren with volume override and haptics. |
