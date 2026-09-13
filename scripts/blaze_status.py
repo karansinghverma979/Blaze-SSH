@@ -4,7 +4,7 @@
 📊 Blaze System Telemetry, Battery, Wi-Fi & Storage Status Radar
 Author: Antigravity Assistant & Karan Singh Verma
 Project: Blaze (Motobook ⇄ Lava Blaze 5G Node)
-Dual Mode: Rich ASCII Terminal HUD & Fast-Path Machine JSON
+Dual Mode: Clean Left-Anchored Terminal HUD (1 datum per line) & Fast-Path JSON
 """
 
 import sys
@@ -33,9 +33,8 @@ BOLD = "\033[1m"
 DIM = "\033[2m"
 RESET = "\033[0m"
 
-def run_ssh_multi(cmd_dict, timeout=5):
+def run_ssh_multi(timeout=5):
     """Runs multiple telemetry queries in a single bundled SSH call for sub-second execution."""
-    # Bundle commands: termux-battery-status, termux-wifi-connectioninfo, df -h /sdcard, uptime
     bundled_cmd = (
         "echo '===BATTERY==='; termux-battery-status 2>/dev/null; "
         "echo '===WIFI==='; termux-wifi-connectioninfo 2>/dev/null; "
@@ -48,7 +47,7 @@ def run_ssh_multi(cmd_dict, timeout=5):
             capture_output=True, text=True, timeout=timeout + 2, encoding="utf-8", errors="replace"
         )
         return res.stdout, res.returncode
-    except Exception as e:
+    except Exception:
         return "", 255
 
 def parse_telemetry(raw_output):
@@ -100,8 +99,6 @@ def display_dashboard(sections, json_mode=False, battery_only=False, wifi_only=F
 
     # Parse Storage
     storage_raw = sections.get("STORAGE", "").split()
-    # Format of df -h: Filesystem Size Used Avail Use% Mounted on
-    # Example: /dev/fuse 116G 68G 48G 59% /storage/emulated/0
     storage_info = {"total": "Unknown", "used": "Unknown", "free": "Unknown", "pct": "Unknown"}
     if len(storage_raw) >= 5:
         storage_info = {
@@ -146,33 +143,42 @@ def display_dashboard(sections, json_mode=False, battery_only=False, wifi_only=F
     band = "5 GHz" if freq > 4000 else ("2.4 GHz" if freq > 2000 else "Wi-Fi")
 
     if battery_only:
-        print(f"\n{charge_icon} {BOLD}Battery:{RESET} {format_battery_bar(pct)} | {charge_str} | 🌡️ {temp}°C | Health: {health}")
+        print(f"\n{charge_icon} {BOLD}Battery:{RESET} {format_battery_bar(pct)}")
+        print(f"🔌 {BOLD}Power State:{RESET} {charge_str}")
+        print(f"🌡️ {BOLD}Temperature:{RESET} {temp}°C")
+        print(f"🩺 {BOLD}Health:{RESET} {health}\n")
         return
 
     if wifi_only:
-        print(f"\n📶 {BOLD}Wi-Fi:{RESET} {CYAN}{ssid}{RESET} ({band}) | Signal: {format_signal_bar(rssi)} | ⚡ {speed} Mbps | IP: {GREEN}{ip}{RESET}")
+        print(f"\n📶 {BOLD}Wi-Fi SSID:{RESET} {CYAN}{ssid}{RESET} ({band})")
+        print(f"📡 {BOLD}Signal:{RESET} {format_signal_bar(rssi)}")
+        print(f"⚡ {BOLD}Throughput:{RESET} {speed} Mbps")
+        print(f"💻 {BOLD}Device IP:{RESET} {GREEN}{ip}{RESET} (Port 8022/SSH)\n")
         return
 
     if storage_only:
-        print(f"\n💾 {BOLD}Storage (/sdcard):{RESET} {storage_info['used']} used / {storage_info['total']} total ({storage_info['pct']}) | Free: {GREEN}{storage_info['free']}{RESET}")
+        print(f"\n💾 {BOLD}Storage (/sdcard):{RESET} {storage_info['used']} used / {storage_info['total']} total ({storage_info['pct']})")
+        print(f"🟢 {BOLD}Available Space:{RESET} {GREEN}{storage_info['free']}{RESET}\n")
         return
 
-    # Full Visual Dashboard Card
-    print(f"""
-{CYAN}┌────────────────────────────────────────────────────────────────────────┐
-│               📱 BLAZE HARDWARE & TELEMETRY RADAR HUD                  │
-├────────────────────────────────────────────────────────────────────────┤
-│ 📱 {BOLD}Device:{RESET}      Lava Blaze 5G (Android 14) │ ⏱️ {BOLD}Uptime:{RESET} {uptime_str:<18} │
-├────────────────────────────────────────────────────────────────────────┤
-│ {charge_icon} {BOLD}Battery:{RESET}     {format_battery_bar(pct):<38} │ 🌡️ {BOLD}Temp:{RESET}   {temp:>4.1f}°C │
-│ 🔌 {BOLD}Power State:{RESET} {charge_str:<38} │ 🩺 {BOLD}Health:{RESET} {health:<7} │
-├────────────────────────────────────────────────────────────────────────┤
-│ 📶 {BOLD}Wi-Fi SSID:{RESET}  {CYAN}{BOLD}{ssid:<26}{RESET} │ 📻 {BOLD}Band:{RESET}   {band:<7} │
-│ 📡 {BOLD}Signal:{RESET}     {format_signal_bar(rssi):<38} │ ⚡ {BOLD}Speed:{RESET}  {speed:>3} Mbps│
-│ 💻 {BOLD}Device IP:{RESET}   {GREEN}{ip:<26}{RESET} │ 🔒 {BOLD}Port:{RESET}   8022/SSH│
-├────────────────────────────────────────────────────────────────────────┤
-│ 💾 {BOLD}Storage:{RESET}     Used: {storage_info['used']:<5} / {storage_info['total']:<5} ({storage_info['pct']:<4})       │ 🟢 {BOLD}Free:{RESET}   {GREEN}{storage_info['free']:<7}{RESET} │
-└────────────────────────────────────────────────────────────────────────┘{RESET}""")
+    # Full Visual Single-Column Left-Anchored HUD (Zero Right Border)
+    print(f"\n{CYAN}┌── 📱 BLAZE HARDWARE & TELEMETRY RADAR ─────────────────────────────{RESET}")
+    print(f"│ 📱 {BOLD}Device:{RESET}      Lava Blaze 5G (Android 14)")
+    print(f"│ ⏱️ {BOLD}Uptime:{RESET}      {uptime_str}")
+    print(f"{CYAN}├── 🔋 Battery & Power ──────────────────────────────────────────────{RESET}")
+    print(f"│ {charge_icon} {BOLD}Level:{RESET}       {format_battery_bar(pct)}")
+    print(f"│ 🔌 {BOLD}Power State:{RESET} {charge_str}")
+    print(f"│ 🌡️ {BOLD}Temperature:{RESET} {temp}°C")
+    print(f"│ 🩺 {BOLD}Health:{RESET}      {health}")
+    print(f"{CYAN}├── 📶 Network & Wireless Connectivity ──────────────────────────────{RESET}")
+    print(f"│ 🌐 {BOLD}Wi-Fi SSID:{RESET}  {CYAN}{BOLD}{ssid}{RESET} ({band})")
+    print(f"│ 📡 {BOLD}Signal:{RESET}     {format_signal_bar(rssi)}")
+    print(f"│ ⚡ {BOLD}Throughput:{RESET} {speed} Mbps")
+    print(f"│ 💻 {BOLD}Device IP:{RESET}   {GREEN}{ip}{RESET} (Port 8022/SSH)")
+    print(f"{CYAN}├── 💾 Storage & Filesystem (/sdcard) ───────────────────────────────{RESET}")
+    print(f"│ 📁 {BOLD}Storage:{RESET}     {storage_info['used']} used / {storage_info['total']} total ({storage_info['pct']})")
+    print(f"│ 🟢 {BOLD}Free Space:{RESET}  {GREEN}{storage_info['free']}{RESET}")
+    print(f"{CYAN}└── 🚀 Node Live & Operational{RESET}\n")
 
 def main():
     parser = argparse.ArgumentParser(
@@ -187,17 +193,17 @@ def main():
 
     args = parser.parse_args()
 
-    raw_out, code = run_ssh_multi({}, timeout=4)
+    raw_out, code = run_ssh_multi(timeout=4)
     if code != 0 or not raw_out:
         if args.json:
             print(json.dumps({"error": "Failed to reach Blaze over SSH :8022"}))
         else:
-            print(f"\n{RED}┌────────────────────────────────────────────────────────┐{RESET}")
-            print(f"{RED}│ ⚠️ BLAZE NODE UNREACHABLE ON PORT 8022                 │{RESET}")
-            print(f"{RED}├────────────────────────────────────────────────────────┤{RESET}")
-            print(f"│ • Status: Phone offline or SSH daemon (sshd) not live. │")
-            print(f"│ • Action: Open Termux on Blaze and run 'sshd'.         │")
-            print(f"{RED}└────────────────────────────────────────────────────────┘{RESET}\n")
+            print(f"\n{RED}┌── ⚠️ BLAZE NODE UNREACHABLE ON PORT 8022 ──────────────────────────{RESET}")
+            print(f"│ • Status: Phone offline or SSH daemon (sshd) not running.")
+            print(f"│ • Action: 1. Ensure Termux is active on Blaze.")
+            print(f"│           2. Run 'sshd' in Termux.")
+            print(f"│           3. Ensure phone is connected to same Wi-Fi / Hotspot.")
+            print(f"{RED}└── Connection Timeout (4s){RESET}\n")
         return
 
     sections = parse_telemetry(raw_out)
