@@ -1,18 +1,80 @@
-# OS & Editor files
-.DS_Store
-Thumbs.db
-*.tmp
-*.log
+# ------------------------------------------------------------------------------
+# ⚡ Blaze Project .gitignore
+# ------------------------------------------------------------------------------
 
-# Sensitive Keys & Credentials
+# 🐍 Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.env
+.venv
+env/
+venv/
+ENV/
+
+# 🔑 Sensitive Keys & Credentials (CRITICAL)
+id_ed25519*
+id_rsa*
 *.pem
 *.key
-id_rsa*
-known_hosts
+*.pub.bak
+known_hosts*
 credentials.json
 token.json
-.env
+.secrets*
+*.env*
 
-# Temporary artifacts
-scratch/
+# 🎥 Recordings, Media Dumps & Download Cache
+*.mp4
+*.mkv
+*.avi
+*.wav
+*.mp3
+*.m4a
+*.opus
+Recordings/
+Blaze_Recordings/
+downloads/
+
+# 💻 OS & Desktop Artifacts
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# 🛠️ IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 📁 Temporary & Scratch Data
 tmp/
+temp/
+scratch/
+*.tmp
+*.bak
+*.log
