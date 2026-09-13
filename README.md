@@ -17,18 +17,19 @@
 ## 🚀 The 7 Core Command Hubs
 
 ```text
-┌─────────────────┬───────────────────────────────────┬───────────────────────────────────────┐
-│ Command         │ Primary Responsibilities          │ Key CLI Switches                      │
-├─────────────────┼───────────────────────────────────┼───────────────────────────────────────┤
-│ 📊 blaze-status │ Hardware Telemetry & Battery HUD  │ --battery, --wifi, --storage, --json  │
-│ 📱 blaze-phone  │ Telephony, SMS, Contacts, 5G Info │ --otp, --sms, --contacts, --logs      │
-│ 🌐 blaze-wifi   │ Wireless Radar, Scrcpy, ADB       │ --info, --scan, --stealth, --camera   │
-│ 🎵 blaze-media  │ Audio Browser, Playback, Volume   │ --play, --pause, --volume, --scan     │
-│ 🎙️ blaze-speak  │ Neural Edge-TTS Voice Center      │ "<text>", -v <persona>, --clip        │
-│ 📋 blaze-clip   │ Bidirectional Clipboard Bridge    │ --pull, --push, --sync, --send        │
-│ 🔔 blaze-notifs │ Notifications, Toasts & Dialogs   │ --list, --otp, --toast, --dialog      │
-│ 📂 blaze-file   │ File Transfers, Drive Z:\ Mount   │ --drop, --pull, --mount, --unmount    │
-└─────────────────┴───────────────────────────────────┴───────────────────────────────────────┘
+┌───────────────────┬───────────────────────────────────┬───────────────────────────────────────┐
+│ Command           │ Primary Responsibilities          │ Key CLI Switches                      │
+├───────────────────┼───────────────────────────────────┼───────────────────────────────────────┤
+│ 📊 blaze-status   │ Hardware Telemetry & Battery HUD  │ --battery, --wifi, --storage, --json  │
+│ 📱 blaze-phone    │ Telephony, SMS, Contacts, 5G Info │ --otp, --sms, --contacts, --logs      │
+│ 📍 blaze-location │ GPS, Network Radar & Geocoding    │ --live, --gps, --network, --open      │
+│ 🌐 blaze-wifi     │ Wireless Radar, Scrcpy, ADB       │ --info, --scan, --stealth, --camera   │
+│ 🎵 blaze-media    │ Audio Browser, Playback, Volume   │ --play, --pause, --volume, --scan     │
+│ 🎙️ blaze-speak    │ Neural Edge-TTS Voice Center      │ "<text>", -v <persona>, --clip        │
+│ 📋 blaze-clip     │ Bidirectional Clipboard Bridge    │ --pull, --push, --sync, --send        │
+│ 🔔 blaze-notifs   │ Notifications, Toasts & Dialogs   │ --list, --otp, --toast, --dialog      │
+│ 📂 blaze-file     │ File Transfers, Drive Z:\ Mount   │ --drop, --pull, --mount, --unmount    │
+└───────────────────┴───────────────────────────────────┴───────────────────────────────────────┘
 ```
 
 ---

@@ -75,15 +75,16 @@ def get_wifi_info(json_mode=False):
         bars = "█████" if rssi > -55 else ("████░" if rssi > -67 else ("███░░" if rssi > -75 else ("██░░░" if rssi > -85 else "█░░░░")))
         sig_color = GREEN if rssi > -65 else (YELLOW if rssi > -78 else RED)
 
-        print(f"\n{BOLD}{CYAN}📶 ACTIVE WI-FI CONNECTION RADAR{RESET}")
-        print("┌────────────────────────────────────────────────────────┐")
-        print(f"│ 🌐 {BOLD}SSID:{RESET}         {CYAN}{BOLD}{ssid}{RESET}")
-        print(f"│ 📡 {BOLD}BSSID:{RESET}        {bssid}")
-        print(f"│ 📶 {BOLD}Signal:{RESET}       {sig_color}{rssi} dBm [{bars}]{RESET}")
-        print(f"│ ⚡ {BOLD}Throughput:{RESET}   {speed} Mbps")
-        print(f"│ 📻 {BOLD}Band:{RESET}         {freq} MHz ({band})")
-        print(f"│ 💻 {BOLD}Local IP:{RESET}     {GREEN}{ip}{RESET}")
-        print("└────────────────────────────────────────────────────────┘\n")
+        print(f"\n{CYAN}┌── 📶 ACTIVE WI-FI CONNECTION RADAR ───────────────────────────{RESET}")
+        print(f"{CYAN}│{RESET}")
+        print(f"│ 🌐 {BOLD}Access Point (SSID):{RESET}  {CYAN}{BOLD}{ssid}{RESET}")
+        print(f"│ 📡 {BOLD}Hardware BSSID:{RESET}       {bssid}")
+        print(f"│ 📶 {BOLD}Signal Strength:{RESET}      {format_signal_bar(rssi)}")
+        print(f"│ ⚡ {BOLD}Link Throughput:{RESET}      {speed} Mbps")
+        print(f"│ 📻 {BOLD}Frequency Band:{RESET}       {freq} MHz ({band})")
+        print(f"│ 💻 {BOLD}Local IP Address:{RESET}     {GREEN}{ip}{RESET} (Port 8022/SSH)")
+        print(f"{CYAN}│{RESET}")
+        print(f"{CYAN}└── ⚡ Network Active{RESET}\n")
     except Exception as e:
         print(f"{RED}❌ Parsing error: {e}{RESET}")
 
@@ -192,21 +193,22 @@ def get_adb_devices(json_mode=False):
 def interactive_menu():
     """Interactive terminal menu."""
     while True:
-        print(f"""
-{CYAN}┌────────────────────────────────────────────────────────┐
-│         🌐 BLAZE WIRELESS, SCRCPY & ADB COMMAND HUB    │
-├────────────────────────────────────────────────────────┤
-│  {BOLD}1{RESET} 📶 Active Wi-Fi Connection Radar                    │
-│  {BOLD}2{RESET} 🔍 Scan Visible Wi-Fi Networks (Spectrum Radar)     │
-│  {BOLD}3{RESET} 📺 Scrcpy Wireless Stream (Stealth - Screen Off)    │
-│  {BOLD}4{RESET} 🖥️ Scrcpy Live Display Stream (Screen On)           │
-│  {BOLD}5{RESET} 🔊 Audio-Only Wireless Stream (PC Speakers)        │
-│  {BOLD}6{RESET} 📷 Wireless HD PC Webcam (Rear / Front Camera)      │
-│  {BOLD}7{RESET} 🎥 Screen & Audio Recording Studio                  │
-│  {BOLD}8{RESET} 🔄 Bounce Wi-Fi Radio (Power Reset)                 │
-│  {BOLD}9{RESET} 🔌 Wireless ADB Transport Diagnostics               │
-│  {BOLD}0{RESET} 🚪 Exit                                             │
-└────────────────────────────────────────────────────────┘{RESET}""")
+        print()
+        print(f"{CYAN}┌── 🌐 BLAZE WIRELESS, SCRCPY & ADB COMMAND HUB ────────────────{RESET}")
+        print(f"{CYAN}│{RESET}")
+        print(f"│  {BOLD}1{RESET}  📶 Active Wi-Fi Connection Radar")
+        print(f"│  {BOLD}2{RESET}  🔍 Scan Visible Wi-Fi Networks (Spectrum Radar)")
+        print(f"│  {BOLD}3{RESET}  📺 Scrcpy Wireless Stream (Stealth - Screen Off)")
+        print(f"│  {BOLD}4{RESET}  🖥️ Scrcpy Live Display Stream (Screen On)")
+        print(f"│  {BOLD}5{RESET}  🔊 Audio-Only Wireless Stream (PC Speakers)")
+        print(f"│  {BOLD}6{RESET}  📷 Wireless HD PC Webcam (Rear / Front Camera)")
+        print(f"│  {BOLD}7{RESET}  🎥 Screen & Audio Recording Studio")
+        print(f"│  {BOLD}8{RESET}  🔄 Bounce Wi-Fi Radio (Power Reset)")
+        print(f"│  {BOLD}9{RESET}  🔌 Wireless ADB Transport Diagnostics")
+        print(f"│  {BOLD}0{RESET}  🚪 Exit")
+        print(f"{CYAN}│{RESET}")
+        print(f"{CYAN}└── ⚡ Select Option [0-9]{RESET}")
+        print()
         try:
             choice = input(f"{BOLD}Blaze-WiFi ❯ {RESET}").strip()
         except (KeyboardInterrupt, EOFError):

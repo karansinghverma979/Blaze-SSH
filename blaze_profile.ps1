@@ -217,35 +217,12 @@ function Invoke-BlazeStatus {
     & python $script @ArgsList
 }
 
-function Get-BlazeLocation {
+function Invoke-BlazeLocation {
     [CmdletBinding()]
-    param(
-        [Parameter()][switch]$Live,
-        [Parameter()][switch]$Open
-    )
-    $targetIp = Get-BlazeTargetIP -Silent
-    if (-not $targetIp) {
-        Write-Host "❌ Blaze unreachable on port 8022." -ForegroundColor Red
-        return
-    }
-    $req = if ($Live) { "termux-location -p gps -r last" } else { "termux-location -r last" }
-    Write-Host "📍 Fetching location from Blaze..." -ForegroundColor Cyan
-    $locJson = ssh -o ConnectTimeout=5 blaze $req
-    if ($locJson) {
-        try {
-            $loc = $locJson | ConvertFrom-Json
-            Write-Host "Latitude:  $($loc.latitude)" -ForegroundColor Green
-            Write-Host "Longitude: $($loc.longitude)" -ForegroundColor Green
-            Write-Host "Accuracy:  $($loc.accuracy)m" -ForegroundColor Yellow
-            Write-Host "Provider:  $($loc.provider)" -ForegroundColor DarkGray
-            if ($Open -and $loc.latitude -and $loc.longitude) {
-                $mapUrl = "https://www.google.com/maps/search/?api=1&query=$($loc.latitude),$($loc.longitude)"
-                Start-Process $mapUrl
-            }
-        } catch {
-            Write-Host $locJson
-        }
-    }
+    param([Parameter(ValueFromRemainingArguments=$true)][string[]]$ArgsList)
+    $script = Join-Path $global:BlazeScriptsRoot "blaze_location.py"
+    if (-not (Test-Path $script)) { $script = "$env:USERPROFILE\.config\blaze_location.py" }
+    & python $script @ArgsList
 }
 
 # ------------------------------------------------------------------------------
@@ -253,13 +230,12 @@ function Get-BlazeLocation {
 # ------------------------------------------------------------------------------
 Set-Alias -Name blaze        -Value Connect-BlazePhone
 
-Set-Alias -Name blaze-phone  -Value Invoke-BlazePhone
-Set-Alias -Name blaze-wifi   -Value Invoke-BlazeWifi
-Set-Alias -Name blaze-media  -Value Invoke-BlazeMedia
-Set-Alias -Name blaze-speak  -Value Invoke-BlazeTTS
-Set-Alias -Name blaze-clip   -Value Invoke-BlazeClip
-Set-Alias -Name blaze-notifs -Value Invoke-BlazeNotifs
-Set-Alias -Name blaze-file   -Value Invoke-BlazeFile
-
-Set-Alias -Name blaze-status -Value Invoke-BlazeStatus
-Set-Alias -Name blaze-location -Value Get-BlazeLocation
+Set-Alias -Name blaze-phone    -Value Invoke-BlazePhone
+Set-Alias -Name blaze-wifi     -Value Invoke-BlazeWifi
+Set-Alias -Name blaze-media    -Value Invoke-BlazeMedia
+Set-Alias -Name blaze-speak    -Value Invoke-BlazeTTS
+Set-Alias -Name blaze-clip     -Value Invoke-BlazeClip
+Set-Alias -Name blaze-notifs   -Value Invoke-BlazeNotifs
+Set-Alias -Name blaze-file     -Value Invoke-BlazeFile
+Set-Alias -Name blaze-location -Value Invoke-BlazeLocation
+Set-Alias -Name blaze-status   -Value Invoke-BlazeStatus

@@ -105,13 +105,13 @@ def get_otp(json_mode=False, raw_mode=False):
         elif raw_mode:
             print(found_otp)
         else:
-            print(f"\n{GREEN}{BOLD}✨ OTP DETECTED & COPIED TO CLIPBOARD!{RESET}")
-            print(f"┌────────────────────────────────────────────────────────┐")
-            print(f"│ 🔑 {BOLD}OTP Code:{RESET}   {CYAN}{BOLD}{found_otp}{RESET}")
-            print(f"│ 👤 {BOLD}Sender:{RESET}     {sender}")
-            print(f"│ 🕒 {BOLD}Received:{RESET}   {received}")
-            print(f"└────────────────────────────────────────────────────────┘")
-            print(f"{DIM}📋 Ready to paste (Ctrl+V) anywhere on Motobook.{RESET}\n")
+            print(f"\n{GREEN}┌── ✨ OTP DETECTED & COPIED TO CLIPBOARD ──────────────────────{RESET}")
+            print(f"{GREEN}│{RESET}")
+            print(f"│ 🔑 {BOLD}OTP Code:{RESET}        {CYAN}{BOLD}{found_otp}{RESET}")
+            print(f"│ 👤 {BOLD}Sender Address:{RESET}  {sender}")
+            print(f"│ 🕒 {BOLD}Received At:{RESET}     {received}")
+            print(f"{GREEN}│{RESET}")
+            print(f"{GREEN}└── 📋 Ready to paste (Ctrl+V) on Motobook{RESET}\n")
         return found_otp
     else:
         if json_mode:
@@ -276,20 +276,21 @@ def get_device_info(json_mode=False):
 def interactive_menu():
     """Displays interactive ASCII menu for terminal users."""
     while True:
-        print(f"""
-{CYAN}┌────────────────────────────────────────────────────────┐
-│         📱 BLAZE TELEPHONY & CELLULAR COMMAND HUB      │
-├────────────────────────────────────────────────────────┤
-│  {BOLD}1{RESET} 🔑 1-Click OTP Extractor (Copies to PC Clipboard)  │
-│  {BOLD}2{RESET} 📬 View Recent SMS Inbox                            │
-│  {BOLD}3{RESET} 📨 Send SMS Message                                 │
-│  {BOLD}4{RESET} 📇 Search Contacts & Address Book                   │
-│  {BOLD}5{RESET} 📞 Dial Phone Number                                │
-│  {BOLD}6{RESET} 📜 View Call History & Callback                     │
-│  {BOLD}7{RESET} 📡 5G NR / LTE Cell Tower Telemetry                 │
-│  {BOLD}8{RESET} 📱 SIM & Baseband Hardware Specs                    │
-│  {BOLD}0{RESET} 🚪 Exit                                             │
-└────────────────────────────────────────────────────────┘{RESET}""")
+        print()
+        print(f"{CYAN}┌── 📱 BLAZE TELEPHONY & CELLULAR COMMAND HUB ──────────────────{RESET}")
+        print(f"{CYAN}│{RESET}")
+        print(f"│  {BOLD}1{RESET}  🔑 1-Click OTP Extractor (Copies to PC Clipboard)")
+        print(f"│  {BOLD}2{RESET}  📬 View Recent SMS Inbox")
+        print(f"│  {BOLD}3{RESET}  📨 Send SMS Message")
+        print(f"│  {BOLD}4{RESET}  📇 Search Contacts & Address Book")
+        print(f"│  {BOLD}5{RESET}  📞 Dial Phone Number")
+        print(f"│  {BOLD}6{RESET}  📜 View Call History & Callback")
+        print(f"│  {BOLD}7{RESET}  📡 5G NR / LTE Cell Tower Telemetry")
+        print(f"│  {BOLD}8{RESET}  📱 SIM & Baseband Hardware Specs")
+        print(f"│  {BOLD}0{RESET}  🚪 Exit")
+        print(f"{CYAN}│{RESET}")
+        print(f"{CYAN}└── ⚡ Select Option [0-8]{RESET}")
+        print()
         try:
             choice = input(f"{BOLD}Blaze-Phone ❯ {RESET}").strip()
         except (KeyboardInterrupt, EOFError):

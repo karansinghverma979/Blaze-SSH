@@ -312,29 +312,25 @@ Use this skill whenever Karan invokes `/blaze` or requests any action, query, au
 
 ### 4. Geolocation & Satellites Operational Guide
 
-* **`blaze-location`** (Direct PowerShell Geolocation Radar):
-  - **What**: Formatted GPS radar displaying latitude, longitude, accuracy radius, MSL altitude, speed, bearing, and clickable Google Maps & OpenStreetMap links.
-  - **Underlying Native Termux Tool**: **`termux-location`**
-  - **Direct Raw SSH Fallback (If PowerShell wrapper is unavailable)**:
-    - Fast cached fix: `ssh blaze "termux-location -p gps -r last"`
-    - Live satellite lock: `ssh blaze "termux-location -p gps -r once"`
-    - Network cell/Wi-Fi trilateration: `ssh blaze "termux-location -p network -r once"`
-  - **Native Syntax / Help**: `termux-location [-p provider] [-r request]`
-    - `-p provider`: `gps` (hardware satellite receiver, default), `network` (Wi-Fi/cell tower trilateration), `passive` (reuses location requests from other apps).
-    - `-r request`: `once` (triggers active hardware sensor lock, default), `last` (instant return of last cached coordinates, 0% battery drain), `updates` (continuous coordinate stream).
-  - **When to Use**: When Karan says *"Where is my phone?"*, *"Get GPS coordinates"*, *"Open phone location in Google Maps"*, or *"Log current location in Obsidian"*.
-  - **How to Use (Direct PowerShell)**:
-    - *Standard Fast Radar*: `pwsh -Command "blaze-location"`
-    - *Force Live Satellite Lock*: `pwsh -Command "blaze-location -Live"`
-    - *Open Google Maps in Browser*: `pwsh -Command "blaze-location -Open"`
-    - *Copy Google Maps Link to Clipboard*: `pwsh -Command "blaze-location -Copy"`
-    - *Raw JSON Output*: `pwsh -Command "blaze-location -Raw"`
+* **`blaze-location`** (Direct PowerShell & Python Geolocation Radar):
+  - **What**: Formatted GPS and network radar displaying latitude, longitude, accuracy radius, MSL altitude, speed, bearing, reverse geocoded address, and clickable Google Maps links.
+  - **Underlying Script**: `scripts/blaze_location.py` (Mirrored to `~/.config/blaze_location.py`)
+  - **Intelligent Fallback Cascade**: Automatically probes `network` -> `passive` -> `gps` so it never returns empty even indoors or when GPS satellites are blocked.
+  - **Offline & Permission Defense**: Automatically detects SSH disconnection (`ConnectTimeout=3`) and location disabled/permission issues with clear actionable recovery cards.
+  - **When to Use**: When Karan says *"Where is my phone?"*, *"Get GPS coordinates"*, *"Open phone location in Google Maps"*, or *"Blaze location"*.
+  - **How to Use (CLI Switches)**:
+    - *Default Interactive Radar*: `blaze-location`
+    - *Force Live Satellite Request*: `blaze-location --live`
+    - *Explicit GPS Provider*: `blaze-location --gps`
+    - *Open Google Maps in Browser*: `blaze-location --open`
+    - *Raw Lat,Long Coordinates*: `blaze-location --raw`
+    - *Structured JSON Output*: `blaze-location --json`
   - **Obsidian Travel Logging Recipe**:
     - Extract coordinates and stamp into Obsidian Daily Note:
       ```powershell
-      $loc = blaze-location -Raw
-      $mapsLink = "https://www.google.com/maps?q=$($loc.latitude),$($loc.longitude)"
-      Add-Content -Path "$env:USERPROFILE\Obsidian\Daily Notes\$(Get-Date -f 'yyyy-MM-dd').md" -Value "`n### 📍 Geolocation Checkpoint ($(Get-Date -f 'HH:mm'))`n- **Coordinates**: $($loc.latitude)°, $($loc.longitude)° (±$($loc.accuracy)m)`n- **Map**: [Google Maps]($mapsLink)`n"
+      $locJson = python C:\Users\karan\Void\Blaze\scripts\blaze_location.py --json | ConvertFrom-Json
+      $mapsLink = $locJson.maps_url
+      Add-Content -Path "$env:USERPROFILE\Obsidian\Daily Notes\$(Get-Date -f 'yyyy-MM-dd').md" -Value "`n### 📍 Geolocation Checkpoint ($(Get-Date -f 'HH:mm'))`n- **Coordinates**: $($locJson.latitude)°, $($locJson.longitude)° (±$($locJson.accuracy_meters)m)`n- **Address**: $($locJson.address)`n- **Map**: [Google Maps]($mapsLink)`n"
       ```
 
 ---

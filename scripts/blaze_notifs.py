@@ -113,12 +113,13 @@ def extract_notif_otp(json_mode=False, raw_mode=False):
         elif raw_mode:
             print(found_otp)
         else:
-            print(f"\n{GREEN}{BOLD}✨ NOTIFICATION OTP DETECTED & COPIED!{RESET}")
-            print(f"┌────────────────────────────────────────────────────────┐")
-            print(f"│ 🔑 {BOLD}OTP Code:{RESET}   {CYAN}{BOLD}{found_otp}{RESET}")
-            print(f"│ 📦 {BOLD}App:{RESET}        {target_notif.get('packageName', 'Unknown')}")
-            print(f"│ 📝 {BOLD}Message:{RESET}    {target_notif.get('content', '')[:60]}")
-            print(f"└────────────────────────────────────────────────────────┘\n")
+            print(f"\n{GREEN}┌── ✨ NOTIFICATION OTP DETECTED & COPIED ──────────────────────{RESET}")
+            print(f"{GREEN}│{RESET}")
+            print(f"│ 🔑 {BOLD}OTP Code:{RESET}        {CYAN}{BOLD}{found_otp}{RESET}")
+            print(f"│ 📦 {BOLD}App Source:{RESET}      {target_notif.get('packageName', 'Unknown')}")
+            print(f"│ 📝 {BOLD}Message Snippet:{RESET} {target_notif.get('content', '')[:60]}")
+            print(f"{GREEN}│{RESET}")
+            print(f"{GREEN}└── 📋 Ready to paste (Ctrl+V) on Motobook{RESET}\n")
     else:
         if json_mode:
             print(json.dumps({"error": "No OTP found in notifications"}))
@@ -205,19 +206,20 @@ def watch_notifs(interval=3):
 def interactive_menu():
     """Interactive terminal menu."""
     while True:
-        print(f"""
-{CYAN}┌────────────────────────────────────────────────────────┐
-│         🔔 BLAZE NOTIFICATIONS & MOBILE UI HUB         │
-├────────────────────────────────────────────────────────┤
-│  {BOLD}1{RESET} 📋 View Active Status Bar Notifications             │
-│  {BOLD}2{RESET} 🔑 1-Click Notification OTP Extractor               │
-│  {BOLD}3{RESET} 📤 Send Native Android Push Notification            │
-│  {BOLD}4{RESET} 🍞 Spawn Floating Screen Toast                      │
-│  {BOLD}5{RESET} 📱 Spawn Interactive Mobile Dialog Prompt           │
-│  {BOLD}6{RESET} 🗑️ Dismiss Notification by ID                       │
-│  {BOLD}7{RESET} 👀 Live Notification Watcher Stream                 │
-│  {BOLD}0{RESET} 🚪 Exit                                             │
-└────────────────────────────────────────────────────────┘{RESET}""")
+        print()
+        print(f"{CYAN}┌── 🔔 BLAZE NOTIFICATIONS & MOBILE UI HUB ─────────────────────{RESET}")
+        print(f"{CYAN}│{RESET}")
+        print(f"│  {BOLD}1{RESET}  📋 View Active Status Bar Notifications")
+        print(f"│  {BOLD}2{RESET}  🔑 1-Click Notification OTP Extractor")
+        print(f"│  {BOLD}3{RESET}  📤 Send Native Android Push Notification")
+        print(f"│  {BOLD}4{RESET}  🍞 Spawn Floating Screen Toast")
+        print(f"│  {BOLD}5{RESET}  📱 Spawn Interactive Mobile Dialog Prompt")
+        print(f"│  {BOLD}6{RESET}  🗑️ Dismiss Notification by ID")
+        print(f"│  {BOLD}7{RESET}  👀 Live Notification Watcher Stream")
+        print(f"│  {BOLD}0{RESET}  🚪 Exit")
+        print(f"{CYAN}│{RESET}")
+        print(f"{CYAN}└── ⚡ Select Option [0-7]{RESET}")
+        print()
         try:
             choice = input(f"{BOLD}Blaze-Notifs ❯ {RESET}").strip()
         except (KeyboardInterrupt, EOFError):
