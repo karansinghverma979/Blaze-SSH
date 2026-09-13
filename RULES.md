@@ -8,8 +8,10 @@
 
 ## 🏛️ Core Principles & Invariants
 
-### 1. Dual-Interface Governance
+### 1. Dual-Interface & Help Governance
 - **Zero Arguments = Interactive UI**: Running any `blaze-*` command without arguments **must always** launch a rich, colored ASCII / numbered interactive menu. It must never require mandatory flags to be usable by a human.
+- **Mandatory Help Flag (`--help` / `-h`)**: Every script and command **must support `--help` and `-h`** with comprehensive, well-formatted descriptions, switches, and usage examples.
+- **In-Menu Help Discovery**: Every interactive menu should include a clear option or note pointing to `--help` / `-h` switches so users discover fast-path flags easily.
 - **Flags = Instant Fast-Path**: Passing explicit CLI flags (e.g. `--otp`, `--pull`, `--push`, `--mount`, `--stealth`) **must bypass all interactive prompts** and execute the operation immediately in <500ms.
 - **Machine Readability**: All scripts must provide `--json` and `--raw` flags to allow headless programmatic parsing by the AI Assistant or shell pipelines.
 

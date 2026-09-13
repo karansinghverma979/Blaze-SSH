@@ -4,7 +4,7 @@
 📋 Blaze Unified Clipboard Bridge & Synchronization Hub
 Author: Antigravity Assistant & Karan Singh Verma
 Project: Blaze (Motobook ⇄ Lava Blaze 5G Node)
-Dual Mode: Fast-Path CLI switches & Symmetrical Terminal UI (No right borders)
+Dual Mode: Fast-Path CLI switches & Rich Interactive Terminal Menu
 """
 
 import sys
@@ -84,17 +84,17 @@ def pull_clipboard(json_mode=False, raw_mode=False):
         elif raw_mode:
             print(phone_text)
         else:
+            print(f"\n{GREEN}{BOLD}✅ PULLED FROM BLAZE ➔ PC CLIPBOARD{RESET}")
+            print(f"┌────────────────────────────────────────────────────────┐")
             preview = phone_text[:120] + ("..." if len(phone_text) > 120 else "")
-            print(f"\n{GREEN}┌── 📥 PULLED FROM BLAZE ➔ PC CLIPBOARD ─────────────────────────{RESET}")
-            print(f"{GREEN}│{RESET}")
-            print(f"│ 📝 {BOLD}Content:{RESET}        {CYAN}{preview}{RESET}")
-            print(f"{GREEN}│{RESET}")
-            print(f"{GREEN}└── 📋 Ready to paste (Ctrl+V) on Motobook{RESET}\n")
+            print(f"│ {CYAN}{preview}{RESET}")
+            print(f"└────────────────────────────────────────────────────────┘")
+            print(f"{DIM}📋 Ready to paste (Ctrl+V) on Motobook.{RESET}\n")
     else:
         if json_mode:
             print(json.dumps({"status": "empty", "error": "Phone clipboard empty or unreachable"}))
         elif not raw_mode:
-            print(f"\n{YELLOW}⚠️ Phone clipboard is empty or unreachable.{RESET}\n")
+            print(f"{YELLOW}⚠️ Phone clipboard is empty or unreachable.{RESET}")
 
 def push_clipboard(custom_text=None, json_mode=False):
     """Pushes PC clipboard (or custom text) to phone."""
@@ -103,7 +103,7 @@ def push_clipboard(custom_text=None, json_mode=False):
         if json_mode:
             print(json.dumps({"status": "error", "error": "Clipboard/text is empty"}))
         else:
-            print(f"\n{YELLOW}⚠️ Nothing to push (clipboard is empty).{RESET}\n")
+            print(f"{YELLOW}⚠️ Nothing to push (clipboard is empty).{RESET}")
         return
 
     success = set_phone_clipboard(text_to_push)
@@ -111,39 +111,36 @@ def push_clipboard(custom_text=None, json_mode=False):
         if json_mode:
             print(json.dumps({"status": "success", "content": text_to_push, "source": "pc", "target": "phone"}))
         else:
+            print(f"\n{GREEN}{BOLD}✅ PUSHED TO BLAZE CLIPBOARD ➔ PHONE{RESET}")
+            print(f"┌────────────────────────────────────────────────────────┐")
             preview = text_to_push[:120] + ("..." if len(text_to_push) > 120 else "")
-            print(f"\n{GREEN}┌── 📤 PUSHED TO BLAZE CLIPBOARD ➔ PHONE ───────────────────────{RESET}")
-            print(f"{GREEN}│{RESET}")
-            print(f"│ 📝 {BOLD}Content:{RESET}        {CYAN}{preview}{RESET}")
-            print(f"{GREEN}│{RESET}")
-            print(f"{GREEN}└── 📱 Phone received toast and clipboard updated{RESET}\n")
+            print(f"│ {CYAN}{preview}{RESET}")
+            print(f"└────────────────────────────────────────────────────────┘")
+            print(f"{DIM}📱 Phone received toast and clipboard updated.{RESET}\n")
     else:
         if json_mode:
             print(json.dumps({"status": "error", "error": "Failed to set clipboard on phone"}))
         else:
-            print(f"\n{RED}❌ Failed to push clipboard to phone.{RESET}\n")
+            print(f"{RED}❌ Failed to push clipboard to phone.{RESET}")
 
 def sync_clipboards():
-    """Shows side-by-side visual comparison and offers sync choice."""
+    """Shows side-by-side visual diff and offers sync choice."""
     pc_text = get_pc_clipboard()
     phone_text = get_phone_clipboard()
 
-    pc_p = (pc_text[:60] + "...") if len(pc_text) > 60 else (pc_text or "<Empty>")
-    ph_p = (phone_text[:60] + "...") if len(phone_text) > 60 else (phone_text or "<Empty>")
+    print(f"\n{BOLD}{CYAN}📋 SIDE-BY-SIDE CLIPBOARD RADAR{RESET}")
+    print("┌────────────────────────────┬────────────────────────────┐")
+    print(f"│ {BOLD}💻 MOTOBOOK (PC){RESET}           │ {BOLD}📱 BLAZE (Phone){RESET}           │")
+    print("├────────────────────────────┼────────────────────────────┤")
+    pc_p = (pc_text[:24] + "..") if len(pc_text) > 26 else pc_text.ljust(26)
+    ph_p = (phone_text[:24] + "..") if len(phone_text) > 26 else phone_text.ljust(26)
+    print(f"│ {pc_p} │ {ph_p} │")
+    print("└────────────────────────────┴────────────────────────────┘")
 
-    print(f"\n{CYAN}┌── 📋 SIDE-BY-SIDE CLIPBOARD RADAR ────────────────────────────{RESET}")
-    print(f"{CYAN}│{RESET}")
-    print(f"│ 💻 {BOLD}Motobook (PC):{RESET}   {pc_p}")
-    print(f"│ 📱 {BOLD}Blaze (Phone):{RESET}   {ph_p}")
-    print(f"{CYAN}│{RESET}")
-    print(f"{CYAN}├── 🔄 Sync Action ─────────────────────────────────────────────{RESET}")
-    print(f"{CYAN}│{RESET}")
-    print(f"│  {BOLD}1{RESET}  ➔ Push PC to Phone  (PC ➔ Phone)")
-    print(f"│  {BOLD}2{RESET}  ➔ Pull Phone to PC  (Phone ➔ PC)")
-    print(f"│  {BOLD}0{RESET}  ➔ Cancel")
-    print(f"{CYAN}│{RESET}")
-    print(f"{CYAN}└──{RESET}")
-    print()
+    print(f"\n{BOLD}Sync Action:{RESET}")
+    print(f"  {CYAN}1{RESET} ➔ Push PC to Phone  (PC ➔ Phone)")
+    print(f"  {CYAN}2{RESET} ➔ Pull Phone to PC  (Phone ➔ PC)")
+    print(f"  {CYAN}0{RESET} ➔ Cancel")
 
     try:
         ch = input(f"{BOLD}Sync ❯ {RESET}").strip()
@@ -152,28 +149,27 @@ def sync_clipboards():
         elif ch == "2":
             pull_clipboard()
     except (KeyboardInterrupt, EOFError):
-        print(f"\n{DIM}👋 Cancelled.{RESET}\n")
+        print(f"\n{DIM}👋 Cancelled.{RESET}")
 
 # --- Interactive Menu ---
 
 def interactive_menu():
     """Interactive terminal menu."""
     while True:
-        print()
-        print(f"{CYAN}┌── 📋 BLAZE UNIFIED CLIPBOARD COMMAND HUB ─────────────────────{RESET}")
-        print(f"{CYAN}│{RESET}")
-        print(f"│  {BOLD}1{RESET}  📥 Pull Phone Clipboard ➔ PC Clipboard")
-        print(f"│  {BOLD}2{RESET}  📤 Push PC Clipboard ➔ Phone Clipboard")
-        print(f"│  {BOLD}3{RESET}  🔄 Side-by-Side Comparison & Bidirectional Sync")
-        print(f"│  {BOLD}4{RESET}  ✍️ Send Custom Text Straight to Phone Clipboard")
-        print(f"│  {BOLD}0{RESET}  🚪 Exit")
-        print(f"{CYAN}│{RESET}")
-        print(f"{CYAN}└── ⚡ Select Option [0-4]{RESET}")
-        print()
+        print(f"""
+{CYAN}┌────────────────────────────────────────────────────────┐
+│         📋 BLAZE UNIFIED CLIPBOARD COMMAND HUB         │
+├────────────────────────────────────────────────────────┤
+│  {BOLD}1{RESET} 📥 Pull Phone Clipboard ➔ PC Clipboard              │
+│  {BOLD}2{RESET} 📤 Push PC Clipboard ➔ Phone Clipboard              │
+│  {BOLD}3{RESET} 🔄 Side-by-Side Visual Diff & Bidirectional Sync    │
+│  {BOLD}4{RESET} ✍️ Send Custom Text Straight to Phone Clipboard     │
+│  {BOLD}0{RESET} 🚪 Exit                                             │
+└────────────────────────────────────────────────────────┘{RESET}""")
         try:
             choice = input(f"{BOLD}Blaze-Clip ❯ {RESET}").strip()
         except (KeyboardInterrupt, EOFError):
-            print(f"\n{DIM}👋 Exited gracefully.{RESET}\n")
+            print(f"\n{DIM}👋 Exited gracefully.{RESET}")
             break
 
         if choice == "1":
@@ -187,7 +183,7 @@ def interactive_menu():
             if text:
                 push_clipboard(custom_text=text)
         elif choice in ["0", "q", "exit"]:
-            print(f"{DIM}👋 Exited.{RESET}\n")
+            print(f"{DIM}👋 Exited.{RESET}")
             break
         else:
             print(f"{YELLOW}⚠️ Invalid choice. Select 0-4.{RESET}")
