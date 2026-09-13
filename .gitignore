@@ -1,0 +1,18 @@
+# OS & Editor files
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+
+# Sensitive Keys & Credentials
+*.pem
+*.key
+id_rsa*
+known_hosts
+credentials.json
+token.json
+.env
+
+# Temporary artifacts
+scratch/
+tmp/
