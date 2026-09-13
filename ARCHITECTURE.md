@@ -51,6 +51,7 @@ C:\Users\karan\Void\Blaze\
 ├── INSTRUCTIONS.md
 ├── ARCHITECTURE.md
 └── scripts/
+    ├── blaze_status.py  # System Telemetry, Battery HUD, Wi-Fi & Storage
     ├── blaze_phone.py   # Telephony, SMS, Contacts & 5G Telemetry
     ├── blaze_wifi.py    # Wireless Radar, Spectrum, Scrcpy & ADB
     ├── blaze_media.py   # Hierarchical Audio Browser, Queue & Volume

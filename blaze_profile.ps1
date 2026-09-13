@@ -209,19 +209,12 @@ function Invoke-BlazeFile {
     & python $script @ArgsList
 }
 
-# ------------------------------------------------------------------------------
-# 5. Direct Status & GPS Utilities
-# ------------------------------------------------------------------------------
-function Get-BlazeStatus {
+function Invoke-BlazeStatus {
     [CmdletBinding()]
-    param()
-    $targetIp = Get-BlazeTargetIP -Silent
-    if (-not $targetIp) {
-        Write-Host "❌ Blaze unreachable on port 8022." -ForegroundColor Red
-        return
-    }
-    Write-Host "📱 Querying Blaze Node ($targetIp)..." -ForegroundColor Cyan
-    ssh -o ConnectTimeout=3 blaze "termux-battery-status"
+    param([Parameter(ValueFromRemainingArguments=$true)][string[]]$ArgsList)
+    $script = Join-Path $global:BlazeScriptsRoot "blaze_status.py"
+    if (-not (Test-Path $script)) { $script = "$env:USERPROFILE\.config\blaze_status.py" }
+    & python $script @ArgsList
 }
 
 function Get-BlazeLocation {
@@ -268,5 +261,5 @@ Set-Alias -Name blaze-clip   -Value Invoke-BlazeClip
 Set-Alias -Name blaze-notifs -Value Invoke-BlazeNotifs
 Set-Alias -Name blaze-file   -Value Invoke-BlazeFile
 
-Set-Alias -Name blaze-status -Value Get-BlazeStatus
+Set-Alias -Name blaze-status -Value Invoke-BlazeStatus
 Set-Alias -Name blaze-location -Value Get-BlazeLocation

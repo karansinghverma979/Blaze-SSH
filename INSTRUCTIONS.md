@@ -61,6 +61,7 @@ Now all commands (`blaze`, `blaze-phone`, `blaze-wifi`, `blaze-media`, `blaze-sp
 
 | Command | Fast-Path Switch | Description |
 | :--- | :--- | :--- |
+| `blaze-status` | `--json`, `--battery`, `--wifi`, `--storage` | Visual HUD: Battery %, Wi-Fi metrics, storage, temp & uptime. |
 | `blaze-phone` | `--otp` | 1-Click OTP extraction from SMS directly to PC clipboard. |
 | `blaze-phone` | `--contacts [query]` | Search address book contacts with phone/SMS actions. |
 | `blaze-phone` | `--logs` | View recent incoming/outgoing/missed call history. |

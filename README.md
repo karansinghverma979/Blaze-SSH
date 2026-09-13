@@ -20,6 +20,7 @@
 ┌─────────────────┬───────────────────────────────────┬───────────────────────────────────────┐
 │ Command         │ Primary Responsibilities          │ Key CLI Switches                      │
 ├─────────────────┼───────────────────────────────────┼───────────────────────────────────────┤
+│ 📊 blaze-status │ Hardware Telemetry & Battery HUD  │ --battery, --wifi, --storage, --json  │
 │ 📱 blaze-phone  │ Telephony, SMS, Contacts, 5G Info │ --otp, --sms, --contacts, --logs      │
 │ 🌐 blaze-wifi   │ Wireless Radar, Scrcpy, ADB       │ --info, --scan, --stealth, --camera   │
 │ 🎵 blaze-media  │ Audio Browser, Playback, Volume   │ --play, --pause, --volume, --scan     │
@@ -104,6 +105,7 @@ C:\Users\karan\Void\Blaze\
 ├── SKILL.md            # Authoritative Antigravity AI assistant skill
 ├── blaze_profile.ps1   # Standalone PowerShell profile integration module
 └── scripts/
+    ├── blaze_status.py # System telemetry, battery HUD, Wi-Fi & storage radar
     ├── blaze_phone.py  # Telephony, SMS, Contacts & Cellular hub
     ├── blaze_wifi.py   # Wi-Fi radar, Scrcpy streaming & ADB hub
     ├── blaze_media.py  # Remote audio browser, player & volume hub
