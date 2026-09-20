@@ -148,6 +148,17 @@ C:\Users\karan\Void\Blaze\
 
 ---
 
+---
+
+## 📱 Mobile Companion: Termux-Workbench
+
+Blaze-SSH represents the **PC-side command and automation nexus** of Karan's dual-node ecosystem. The mobile-side environment running directly on the Android device is powered by **[Termux-Workbench](https://github.com/karansinghverma979/Termux-Workbench)**:
+
+* **[Termux-Workbench](https://github.com/karansinghverma979/Termux-Workbench)**: High-velocity mobile DevOps and touch workstation featuring swappable extra-key profiles, a live Starship/P10k prompt switchboard, dynamic tab title sentinel, and a 1-key `peer` connector back to this Windows workstation.
+* Together, **Blaze-SSH** (Desktop) and **Termux-Workbench** (Mobile) form an integrated, sovereign computing bridge over OpenSSH (port 8022) and wireless ADB (port 5555).
+
+---
+
 ## 📜 Governance & Architecture
 - [RULES.md](RULES.md): Architectural invariants and safety protocols.
 - [INSTRUCTIONS.md](INSTRUCTIONS.md): Detailed installation runbook.
