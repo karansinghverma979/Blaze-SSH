@@ -1,7 +1,7 @@
 # 🌐 `blaze-wifi` — Interface & Terminal Interactive Specification
 
 > **Command**: `blaze-wifi`  
-> **Source Script**: [`C:\Users\karan\Void\Blaze\scripts\blaze_wifi.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_wifi.py)  
+> **Source Script**: [`scripts/blaze_wifi.py`](file:///scripts/blaze_wifi.py)  
 > **PowerShell Cmdlet**: `Invoke-BlazeWifi` (Alias: `blaze-wifi`)  
 > **Target Subsystems**: Lava Blaze 5G Wi-Fi Radio, Hotspot AP, Wireless ADB (`port 5555`), Scrcpy Display/Camera/Audio Streaming Engine.
 

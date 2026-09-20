@@ -95,7 +95,7 @@ blaze-phone --otp
 blaze-clip --pull
 
 # 3. Drop a Local File to Phone (/sdcard/Download) + Auto MediaStore Scan:
-blaze-file --drop "C:\Users\karan\Downloads\report.pdf"
+blaze-file --drop "$HOME\Downloads\report.pdf"
 
 # 4. Pull a Remote File from Phone directly to PC Downloads:
 blaze-file --pull "/sdcard/Download/invoice.pdf"
@@ -115,7 +115,7 @@ blaze-status
 ## 📁 Repository Structure
 
 ```text
-C:\Users\karan\Void\Blaze\
+Blaze/
 ├── .gitignore          # Exclusions for Python cache & temp files
 ├── README.md           # Master repository documentation & setup guide
 ├── RULES.md            # Invariants, safety rules & port allocations

@@ -8,7 +8,7 @@ trigger: /blaze
 
 Use this skill whenever Karan invokes `/blaze` or requests any action, query, automation, file transfer, screen streaming, audio synthesis, camera capture, telephony, or diagnostic task involving **Blaze** (Lava Blaze 5G / Android 14 / Termux) and **Motobook** (Windows 11 PC).
 
-> **Single Source of Truth**: This skill is the authoritative operational governor, UI/transport specification, and automation engine for the **Motobook ⇄ Blaze Ecosystem** located in [`C:\Users\karan\Void\Blaze\`](file:///C:/Users/karan/Void/Blaze/).
+> **Single Source of Truth**: This skill is the authoritative operational governor, UI/transport specification, and automation engine for the **Motobook ⇄ Blaze Ecosystem** located in this repository (`./`).
 
 ---
 
@@ -19,7 +19,7 @@ Use this skill whenever Karan invokes `/blaze` or requests any action, query, au
 │             💻 MOTOBOOK (Windows 11 Node)              │
 │  PowerShell Profile (10 blaze-* Commands) + Scoop CLI  │
 │  OpenSSH Server (Port 22) | User: karan                │
-│  Direct Downloads: C:\Users\karan\Downloads\           │
+│  Direct Downloads: ~/Downloads/ (%USERPROFILE%)         │
 └──────────────────────────┬─────────────────────────────┘
                            │ Zero-Password Ed25519 Trust
                            │ Dynamic IP Discovery (<200ms)
@@ -64,7 +64,7 @@ All `blaze-*` commands must strictly adhere to these 6 architectural invariants:
 3. **Dual-Transport Foreground Intent Engine**:
    - To bypass Android 10+ background activity launch restrictions over SSH, file/URL launches execute via `adb shell am start -a android.intent.action.VIEW -d "<URI>"` with automatic fallback to `termux-open`.
 4. **Direct Native Downloads**:
-   - All pulled files from phone land directly in native Windows `~/Downloads` (`C:\Users\karan\Downloads\`).
+   - All pulled files from phone land directly in native Windows `~/Downloads` (`%USERPROFILE%\Downloads\`).
    - Legacy `Z:\` Rclone mounts and `~/Blaze/` directories are permanently deprecated and removed.
 5. **Standardized Menu Structure**:
    - Every interactive hub includes a `📖 Help & CLI Reference` option positioned right before `0. Exit`.
@@ -75,56 +75,56 @@ All `blaze-*` commands must strictly adhere to these 6 architectural invariants:
 
 ## 🎮 Complete 10 Operational Commands Suite
 
-All scripts live in [`C:\Users\karan\Void\Blaze\scripts\`](file:///C:/Users/karan/Void/Blaze/scripts/) and are exposed via [`blaze_profile.ps1`](file:///C:/Users/karan/Void/Blaze/blaze_profile.ps1).
+All scripts live in [`scripts/`](file:///scripts/) and are exposed via [`blaze_profile.ps1`](file:///blaze_profile.ps1).
 
 ### 1. `blaze` (Core Connection & Auto-Discovery)
 - **Command**: `blaze` or `blaze "<command>"`
-- **File**: [`blaze_profile.ps1`](file:///C:/Users/karan/Void/Blaze/blaze_profile.ps1)
+- **File**: `blaze_profile.ps1`
 - **Function**: 3-Tier dynamic IP discovery (Gateway $\to$ MAC `F6-DC-F9-03-FA-07` $\to$ Cached IP), dynamic `~/.ssh/config` injection, interactive Termux Zsh shell with disconnect recovery.
 
 ### 2. `blaze-status` (System Telemetry & Health HUD)
 - **Command**: `blaze-status` (or `blaze-status --json`)
-- **File**: [`scripts/blaze_status.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_status.py)
+- **File**: `scripts/blaze_status.py`
 - **Function**: Sub-second bundled SSH query rendering battery %, temperature, charging status, Wi-Fi SSID/IP/frequency, storage usage, and uptime.
 
 ### 3. `blaze-location` (GPS & Reverse Geolocation Radar)
 - **Command**: `blaze-location` (or `blaze-location --raw`, `--map`)
-- **File**: [`scripts/blaze_location.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_location.py)
+- **File**: `scripts/blaze_location.py`
 - **Function**: Multi-provider location acquisition (`gps` $\to$ `network` $\to$ `passive`), OpenStreetMap reverse geocoding to human-readable address, Google Maps browser launcher.
 
 ### 4. `blaze-phone` (Telephony, SMS & Contacts Hub)
 - **Command**: `blaze-phone` (or `blaze-phone call <num>`, `blaze-phone sms <num> <msg>`)
-- **File**: [`scripts/blaze_phone.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_phone.py)
+- **File**: `scripts/blaze_phone.py`
 - **Function**: Earpiece & Speakerphone call initiator, SMS conversation inbox (newest-first with inline search), Contact phonebook picker.
 
 ### 5. `blaze-clip` (Bidirectional Clipboard Sync)
 - **Command**: `blaze-clip` (or `blaze-clip --push`, `--pull`, `--watch`)
-- **File**: [`scripts/blaze_clip.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_clip.py)
+- **File**: `scripts/blaze_clip.py`
 - **Function**: Termux API v2 protocol synchronization, side-by-side diff preview between Windows and Android clipboard, continuous sync daemon.
 
 ### 6. `blaze-notifs` (Notification Studio & Toast Engine)
 - **Command**: `blaze-notifs` (or `blaze-notifs toast "<msg>"`, `blaze-notifs dialog`)
-- **File**: [`scripts/blaze_notifs.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_notifs.py)
+- **File**: `scripts/blaze_notifs.py`
 - **Function**: Screen toasts (centered gravity, custom hex colors), Mobile Dialog Studio (Text, PIN password, multiline, numbers, confirm, radio, checkbox, bottom sheet, speech-to-text), Tag/ID prioritized notification dismissal, 1-click OTP extraction.
 
 ### 7. `blaze-wifi` (Wireless ADB & Scrcpy Control Center)
 - **Command**: `blaze-wifi` (or `blaze-wifi --adb`, `blaze-wifi --scrcpy <preset>`)
-- **File**: [`scripts/blaze_wifi.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_wifi.py)
+- **File**: `scripts/blaze_wifi.py`
 - **Function**: Hotspot AP vs Wi-Fi Client radar detection, 1-Click USB $\to$ Wireless switch wizard (`adb tcpip 5555`), Scrcpy presets (Stealth 60fps, Live, Audio-only, HD Webcam, Recording), extended 15s ADB timeouts with zombie process auto-recovery.
 
 ### 8. `blaze-file` (Remote File Explorer & Transfer Hub)
 - **Command**: `blaze-file` (or `blaze-file push <file>`, `blaze-file pull <remote_path>`)
-- **File**: [`scripts/blaze_file.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_file.py)
+- **File**: `scripts/blaze_file.py`
 - **Function**: Inline FZF remote storage explorer (`/sdcard/Download`, `Documents`, `DCIM`, `Motobook`, `Music`), local file drop wizard with MediaStore auto-indexing, direct pull to `~/Downloads/`, dual-transport foreground intents (`am start` + `termux-open`).
 
 ### 9. `blaze-media` (Hierarchical Audio Browser & Sound Engine)
 - **Command**: `blaze-media` (or `blaze-media play <path>`, `blaze-media volume <0-15>`)
-- **File**: [`scripts/blaze_media.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_media.py)
+- **File**: `scripts/blaze_media.py`
 - **Function**: Inline FZF audio explorer (`/sdcard/Music`, `Download`, `Motobook`), Scrcpy Opus audio streaming to PC speakers, playback radar, 6-channel volume master console, TTS & haptics.
 
 ### 10. `blaze-speak` (Studio HD Voice Synthesis & TTS Center)
 - **Command**: `blaze-speak` (or `blaze-speak "<text>" -v jarvis`, `blaze-speak --clip`, `blaze-speak --alert`)
-- **File**: [`scripts/blaze_speak.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_speak.py)
+- **File**: `scripts/blaze_speak.py`
 - **Function**: 20 Studio HD Neural Edge-TTS + Google Assist voice personas, persistent default voice stored in `~/.config/blaze_default_voice.txt`, single-shot emergency siren, live spoken briefings, and interactive Voice Chat REPL.
 
 ---

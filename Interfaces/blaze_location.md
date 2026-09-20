@@ -1,7 +1,7 @@
 # 📍 `blaze-location` — Geolocation, GPS Radar & Reverse Geocoding Interface
 
 > **Command**: `blaze-location`  
-> **Source Script**: [`C:\Users\karan\Void\Blaze\scripts\blaze_location.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_location.py)  
+> **Source Script**: [`scripts/blaze_location.py`](file:///scripts/blaze_location.py)  
 > **PowerShell Cmdlet**: `Invoke-BlazeLocation` (Alias: `blaze-location`)  
 > **Location Providers**: Multi-Tier Cascade (`gps` ➔ `network` ➔ `passive`)  
 > **Reverse Geocoding**: OpenStreetMap Nominatim Engine (`lat,lon` ➔ Street Address)  

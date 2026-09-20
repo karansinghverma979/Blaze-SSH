@@ -44,7 +44,7 @@
 ## 📁 3. Directory Layout
 
 ```text
-C:\Users\karan\Void\Blaze\
+Blaze/
 ├── .gitignore
 ├── README.md
 ├── RULES.md

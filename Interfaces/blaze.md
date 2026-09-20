@@ -1,7 +1,7 @@
 # ⚡ `blaze` — Core SSH Shell Connector & Network Discovery Interface
 
 > **Command**: `blaze` (or `blaze "<remote_command>"`)  
-> **Source Module**: [`C:\Users\karan\Void\Blaze\blaze_profile.ps1`](file:///C:/Users/karan/Void/Blaze/blaze_profile.ps1)  
+> **Source Module**: [`blaze_profile.ps1`](file:///blaze_profile.ps1)  
 > **PowerShell Function**: `Connect-BlazePhone` (Alias: `blaze`)  
 > **Target Node**: Lava Blaze 5G (`u0_a46@blaze:8022` running Termux Zsh)  
 > **Security Protocol**: Zero-Password Ed25519 Cryptographic Handshake (`~/.ssh/id_ed25519`)
@@ -13,7 +13,7 @@
 When running `blaze` from PowerShell without arguments:
 
 ```text
-PS C:\Users\karan> blaze
+PS > blaze
 ⚡ Connecting to Blaze at 10.154.149.220...
 
 [Android Screen Notification Pop-up: ⚡ Motobook terminal connected]
@@ -34,7 +34,7 @@ u0_a46@blaze ~ $ _
 When passing arbitrary remote commands to `blaze`:
 
 ```text
-PS C:\Users\karan> blaze "termux-battery-status"
+PS > blaze "termux-battery-status"
 {
   "health": "GOOD",
   "percentage": 88,
@@ -45,7 +45,7 @@ PS C:\Users\karan> blaze "termux-battery-status"
 ```
 
 ```text
-PS C:\Users\karan> blaze "ls -la ~/storage/shared/Download"
+PS > blaze "ls -la ~/storage/shared/Download"
 total 248
 drwxrwx--x  4 root sdcard_rw   4096 Sep 13 22:30 .
 drwxrwx--x 32 root sdcard_rw   4096 Sep 10 14:15 ..

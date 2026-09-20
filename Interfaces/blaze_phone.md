@@ -1,7 +1,7 @@
 # 📱 `blaze-phone` — Telephony, SMS Inbox, Contacts & 5G Cellular Interface
 
 > **Command**: `blaze-phone`  
-> **Source Script**: [`C:\Users\karan\Void\Blaze\scripts\blaze_phone.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_phone.py)  
+> **Source Script**: [`scripts/blaze_phone.py`](file:///scripts/blaze_phone.py)  
 > **PowerShell Cmdlet**: `Invoke-BlazePhone` (Alias: `blaze-phone`)  
 > **Subsystems**: Android Telephony API (`termux-telephony-call`, `termux-sms-send`, `termux-sms-list`, `termux-contact-list`, `termux-call-log`)  
 > **Key Capabilities**: 1-Click OTP Extraction to PC Clipboard, In-Ear & Speakerphone Dialer, Interactive SMS Threading, Fuzzy Address Book

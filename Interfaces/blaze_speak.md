@@ -1,7 +1,7 @@
 # 🎙️ `blaze-speak` — Studio HD Neural Voice Synthesis & Assistant Speech Interface
 
 > **Command**: `blaze-speak`  
-> **Source Script**: [`C:\Users\karan\Void\Blaze\scripts\blaze_speak.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_speak.py)  
+> **Source Script**: [`scripts/blaze_speak.py`](file:///scripts/blaze_speak.py)  
 > **PowerShell Cmdlet**: `Invoke-BlazeTTS` (Alias: `blaze-speak`)  
 > **Voice Engines**: Microsoft Edge-TTS Cloud Neural + Google Assistant TTS (`gTTS`) + Offline Android TTS  
 > **Audio Delivery**: SSH SCP + Blaze OpenSL ES Hardware Engine (`mpv --ao=opensles --volume=140`)  

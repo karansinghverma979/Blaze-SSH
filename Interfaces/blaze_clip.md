@@ -1,7 +1,7 @@
 # 📋 `blaze-clip` — Bidirectional Clipboard Sync & Visual Diff Interface
 
 > **Command**: `blaze-clip`  
-> **Source Script**: [`C:\Users\karan\Void\Blaze\scripts\blaze_clip.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_clip.py)  
+> **Source Script**: [`scripts/blaze_clip.py`](file:///scripts/blaze_clip.py)  
 > **PowerShell Cmdlet**: `Invoke-BlazeClip` (Alias: `blaze-clip`)  
 > **Protocol**: Termux API v2 Protocol (`/data/data/com.termux/files/usr/libexec/termux-api Clipboard -e api_version 2`)  
 > **Windows Engine**: Native PowerShell `Get-Clipboard` / `Set-Clipboard`  

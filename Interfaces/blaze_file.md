@@ -1,9 +1,9 @@
 # 📂 `blaze-file` — Remote Explorer & Wireless Bridge Interface
 
 > **Command**: `blaze-file`  
-> **Source Script**: [`C:\Users\karan\Void\Blaze\scripts\blaze_file.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_file.py)  
+> **Source Script**: [`scripts/blaze_file.py`](file:///scripts/blaze_file.py)  
 > **PowerShell Cmdlet**: `Invoke-BlazeFile` (Alias: `blaze-file`)  
-> **Local Destination**: Windows Downloads (`C:\Users\karan\Downloads\`)  
+> **Local Destination**: Windows Downloads (`%USERPROFILE%\Downloads\`)  
 > **Remote Roots**: `/sdcard/Download`, `/sdcard/Motobook`, `/sdcard/DCIM`, `/sdcard/Documents`, `~`  
 > **Foreground Intent Dispatcher**: Dual-Transport (`adb shell am start` with `termux-open` fallback)
 
@@ -92,7 +92,7 @@ Source Folder > _
 
 ### Step 2: Local File Selector (Sorted Newest-First)
 ```text
-┌── Files in C:\Users\karan\Downloads (Newest First) ────────────────────────────────────────┐
+┌── Files in ~/Downloads (Newest First) ─────────────────────────────────────────────────────┐
 │ 01. project_report_final.pdf                                                               │
 │ 02. screenshot_20260914.png                                                                │
 │ 03. firmware_update.bin                                                                    │
@@ -133,12 +133,12 @@ Drop Destination > _
 ## 📥 4. Pull to PC Downloads Confirmation (`Option 3` / `--pull`)
 
 ```text
-📥 Pulling Blaze:/sdcard/Download/invoice_2026.pdf ➔ PC:C:\Users\karan\Downloads...
+📥 Pulling Blaze:/sdcard/Download/invoice_2026.pdf ➔ PC:%USERPROFILE%\Downloads...
 
 ✅ FILE PULLED TO PC DOWNLOADS SUCCESSFULLY!
 ┌────────────────────────────────────────────────────────┐
 │ 📁 File Name:    invoice_2026.pdf                      │
-│ 📂 Saved In:     C:\Users\karan\Downloads\invoice_2026.pdf│
+│ 📂 Saved In:     %USERPROFILE%\Downloads\invoice_2026.pdf│
 └────────────────────────────────────────────────────────┘
 💻 Available in your PC Downloads folder.
 ```

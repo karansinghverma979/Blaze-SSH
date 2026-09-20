@@ -1,7 +1,7 @@
 # 📊 `blaze-status` — System Telemetry, Battery & Network Status Radar Interface
 
 > **Command**: `blaze-status`  
-> **Source Script**: [`C:\Users\karan\Void\Blaze\scripts\blaze_status.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_status.py)  
+> **Source Script**: [`scripts/blaze_status.py`](file:///scripts/blaze_status.py)  
 > **PowerShell Cmdlet**: `Invoke-BlazeStatus` (Alias: `blaze-status`)  
 > **Query Engine**: Bundled Sub-Second SSH Query (`ConnectTimeout=4`)  
 > **Layout Specification**: Clean Left-Anchored Open Cards (Single column, symmetrical spacing, 0 right borders)

@@ -1,7 +1,7 @@
 # 🎵 `blaze-media` — Hierarchical Audio Explorer, Playback Engine & Sound Master Interface
 
 > **Command**: `blaze-media`  
-> **Source Script**: [`C:\Users\karan\Void\Blaze\scripts\blaze_media.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_media.py)  
+> **Source Script**: [`scripts/blaze_media.py`](file:///scripts/blaze_media.py)  
 > **PowerShell Cmdlet**: `Invoke-BlazeMedia` (Alias: `blaze-media`)  
 > **Supported Formats**: `.mp3`, `.m4a`, `.wav`, `.flac`, `.aac`, `.ogg`, `.opus`, `.m4b`, `.mid`  
 > **Audio Transports**: Termux Media Player Engine + Scrcpy Opus Streaming to PC Speakers  

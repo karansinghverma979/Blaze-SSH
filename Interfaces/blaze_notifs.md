@@ -1,7 +1,7 @@
 # 🔔 `blaze-notifs` — Notification Studio, Mobile Dialogs & Screen Toast Interface
 
 > **Command**: `blaze-notifs`  
-> **Source Script**: [`C:\Users\karan\Void\Blaze\scripts\blaze_notifs.py`](file:///C:/Users/karan/Void/Blaze/scripts/blaze_notifs.py)  
+> **Source Script**: [`scripts/blaze_notifs.py`](file:///scripts/blaze_notifs.py)  
 > **PowerShell Cmdlet**: `Invoke-BlazeNotifs` (Alias: `blaze-notifs`)  
 > **Android Subsystems**: `termux-notification`, `termux-notification-list`, `termux-toast`, `termux-dialog`  
 > **Key Capabilities**: 13-Widget Mobile Dialog Studio, Centered Screen Toasts with Color Palettes, Notification Tag/ID Dismissal, Live Polling Radar
