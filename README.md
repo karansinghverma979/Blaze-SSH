@@ -1,9 +1,9 @@
-# ⚡ Blaze: Android Mobile Integration & Automation Hub
+# ⚡ Blaze-Termux-SSH: Android Mobile Integration & Automation Hub
 
 > **Device Pair**: `Motobook` (Windows 11 Pro) ⇄ `Blaze` (Lava Blaze 5G / Android 14)  
 > **SSH Ports**: `22` (PC) / `8022` (Phone) | **Wireless ADB**: Port `5555`  
 > **Author**: Karan Singh Verma & Antigravity Assistant  
-> **Repository**: [https://github.com/karansinghverma979/Blaze-SSH](https://github.com/karansinghverma979/Blaze-SSH)
+> **Repository**: [https://github.com/karansinghverma979/Blaze-Termux-SSH](https://github.com/karansinghverma979/Blaze-Termux-SSH)
 
 ---
 

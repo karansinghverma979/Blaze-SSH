@@ -1,8 +1,8 @@
 # ==============================================================================
-# ⚡ Blaze Mobile Integration & Automation Hub — PowerShell Profile Module
+# ⚡ Blaze-Termux-SSH Mobile Integration Hub — PowerShell Profile Module
 # Project: Motobook ⇄ Lava Blaze 5G (Android Termux)
 # Author: Karan Singh Verma & Antigravity Assistant
-# Repository: https://github.com/karansinghverma/Blaze
+# Repository: https://github.com/karansinghverma979/Blaze-Termux-SSH
 # ==============================================================================
 
 <#
@@ -10,7 +10,7 @@
     Official PowerShell functions, aliases, and dynamic network discovery for Blaze.
 .DESCRIPTION
     Dot-source this file in your $PROFILE to enable all `blaze-*` commands:
-    . "$env:USERPROFILE\Void\Blaze\blaze_profile.ps1"
+    . "$env:USERPROFILE\Void\Blaze-Termux-SSH\blaze_profile.ps1"
 #>
 
 # ------------------------------------------------------------------------------
