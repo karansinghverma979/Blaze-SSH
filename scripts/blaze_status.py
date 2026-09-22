@@ -36,8 +36,8 @@ RESET = "\033[0m"
 def run_ssh_multi(timeout=5):
     """Runs multiple telemetry queries in a single bundled SSH call for sub-second execution."""
     bundled_cmd = (
-        "echo '===BATTERY==='; termux-battery-status 2>/dev/null; "
-        "echo '===WIFI==='; termux-wifi-connectioninfo 2>/dev/null; "
+        "echo '===BATTERY==='; timeout 1.5 termux-battery-status 2>/dev/null || echo '{}'; "
+        "echo '===WIFI==='; timeout 1.5 termux-wifi-connectioninfo 2>/dev/null || echo '{}'; "
         "echo '===STORAGE==='; df -h /sdcard 2>/dev/null | tail -n 1; "
         "echo '===UPTIME==='; uptime -p 2>/dev/null || uptime 2>/dev/null"
     )

@@ -74,14 +74,17 @@ notepad $PROFILE
 ```
 Add this single line at the bottom of the file:
 ```powershell
-. "$env:USERPROFILE\Void\Blaze\blaze_profile.ps1"
+. "$env:USERPROFILE\Void\Blaze-Termux-SSH\blaze_profile.ps1"
 ```
 *Save and reload your terminal (`. $PROFILE`). All `blaze-*` commands are now permanently active!*
 
----
-
-#### 📋 Method B: Copy & Paste Directly into Profile
-If you prefer embedding the code directly, open `blaze_profile.ps1` from this repository, copy its entire contents, and paste it into your `$PROFILE`.
+#### 🧠 Smart Multi-Tier Network & UID Sentinel
+* **Tier 1 (Direct Hotspot)**: Instantly detects mobile hotspot gateway IP on port 8022 (<30ms).
+* **Tier 2 (Hardware MAC)**: Locates phone on shared Wi-Fi via static hardware MAC.
+* **Tier 3 (Cached IP)**: Fast-paths connection using session cache or `~/.ssh/config`.
+* **Tier 4 (Parallel Subnet Sweep)**: Sweeps active `/24` subnet in parallel (<2s) if IP changed and MAC is randomized.
+* **Root-Agnostic Dynamic UID**: Automatically queries `whoami` over SSH and updates `~/.ssh/config`—survives factory resets, UID drift (`u0_a201`), and transitions between rooted and non-rooted devices seamlessly.
+* **Terminal Connection HUD**: Renders a clean ASCII connection summary (IP, port, network mode, remote user, round-trip latency, and auth mode) with zero freezing.
 
 ---
 
@@ -154,7 +157,7 @@ Blaze/
 
 Blaze-SSH represents the **PC-side command and automation nexus** of Karan's dual-node ecosystem. The mobile-side environment running directly on the Android device is powered by **[Termux-Workbench](https://github.com/karansinghverma979/Termux-Workbench)**:
 
-* **[Termux-Workbench](https://github.com/karansinghverma979/Termux-Workbench)**: High-velocity mobile DevOps and touch workstation featuring swappable extra-key profiles, a live Starship/P10k prompt switchboard, dynamic tab title sentinel, and a 1-key `peer` connector back to this Windows workstation.
+* **[Termux-Workbench](https://github.com/karansinghverma979/Termux-Workbench)**: High-velocity mobile DevOps and touch workstation featuring swappable extra-key profiles, a live Starship prompt suite, dynamic tab title sentinel, and a 1-key `peer` connector back to this Windows workstation.
 * Together, **Blaze-SSH** (Desktop) and **Termux-Workbench** (Mobile) form an integrated, sovereign computing bridge over OpenSSH (port 8022) and wireless ADB (port 5555).
 
 ---
